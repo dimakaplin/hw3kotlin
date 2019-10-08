@@ -51,6 +51,20 @@
         app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
     <ImageButton
+        android:id="@+id/img_play"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="32dp"
+         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/videoBackground"
+        android:src="@drawable/play"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_name_txt" />
+
+    <ImageButton
         android:id="@+id/img_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +73,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/like_grey"
         app:layout_constraintEnd_toStartOf="@+id/likes"
-        app:layout_constraintTop_toBottomOf="@+id/post_name_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/img_play" />
 
     <TextView
         android:id="@+id/likes"
@@ -69,7 +83,7 @@
         android:layout_marginEnd="8dp"
         android:text="0"
         app:layout_constraintEnd_toStartOf="@+id/img_comment"
-        app:layout_constraintTop_toBottomOf="@+id/post_name_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/img_play" />
 
     <ImageButton
         android:id="@+id/img_comment"
@@ -80,7 +94,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/comment_grey"
         app:layout_constraintEnd_toStartOf="@+id/comments"
-        app:layout_constraintTop_toBottomOf="@+id/post_name_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/img_play" />
 
     <TextView
         android:id="@+id/comments"
@@ -90,7 +104,7 @@
         android:layout_marginEnd="8dp"
         android:text="0"
         app:layout_constraintEnd_toStartOf="@+id/img_share"
-        app:layout_constraintTop_toBottomOf="@+id/post_name_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/img_play" />
 
     <ImageButton
         android:id="@+id/img_share"
@@ -102,16 +116,28 @@
         android:src="@drawable/share_grey"
 
         app:layout_constraintEnd_toStartOf="@+id/shares"
-        app:layout_constraintTop_toBottomOf="@+id/post_name_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/img_play" />
 
     <TextView
         android:id="@+id/shares"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="8dp"
         android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/img_location"
+        app:layout_constraintTop_toBottomOf="@+id/img_play" />
+
+    <ImageButton
+        android:id="@+id/img_location"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+
+        android:layout_marginEnd="32dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/location_grey"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_name_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/img_play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

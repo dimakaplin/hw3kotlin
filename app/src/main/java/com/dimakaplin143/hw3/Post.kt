@@ -7,11 +7,14 @@ class Post(
     var postName: String = "Time to wine",
     var postAuthor: String  = "Big brother",
     var likes: Int  = 0,
-    var comments: Int = 2,
+    var comments: Int = 1,
     var shares: Int = 0,
     var wasLiked: Boolean = false,
     var wasComment: Boolean = true,
-    var wasShared: Boolean = false
+    var wasShared: Boolean = false,
+    var location: Location = Location(),
+    var videoURL: String = "",
+    var hasVideo: Boolean = videoURL !== ""
 ) {
     fun getDateDiff(): String {
         val now: Calendar = GregorianCalendar()
@@ -33,4 +36,21 @@ class Post(
         }
 
     }
+
+    fun like(): Boolean {
+        wasLiked = !wasLiked
+        if(wasLiked) ++likes else --likes
+        return wasLiked
+    }
+    fun share(): Boolean {
+        wasShared = !wasShared
+        if(wasShared) ++shares else --shares
+        return wasLiked
+    }
+    fun comment(): Boolean {
+        wasComment = !wasComment
+        if(wasComment) ++comments else --comments
+        return wasLiked
+    }
+
 }
