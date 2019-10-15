@@ -9,7 +9,7 @@ import android.widget.ImageButton
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val post = Post(location = Location(18.476223, -77.893890), videoURL = "https://www.youtube.com/watch?v=et8xNAc2ic8")
+    private var post = Post(location = Location(18.476223, -77.893890, "Vaneewa 195"), videoURL = "https://www.youtube.com/watch?v=et8xNAc2ic8")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,62 +17,56 @@ class MainActivity : AppCompatActivity() {
         checkingClickResult()
         initClickers()
         checkingVideo()
+        if(post.hasLocation) img_location.visibility = View.VISIBLE else img_location.visibility = View.GONE
 
 
     }
 
     private fun checkingClickResult() {
-        if(post.likes == 0) likes.alpha = (0).toFloat() else likes.alpha = (1).toFloat()
-        if(post.comments == 0) comments.alpha = (0).toFloat() else comments.alpha = (1).toFloat()
+        checkingShares()
+        checkingComments()
+        checkingLikes()
+    }
+
+    private fun checkingShares() {
         if(post.shares == 0) shares.alpha = (0).toFloat() else shares.alpha = (1).toFloat()
-        if(post.wasLiked) img_like.setImageResource(R.drawable.like_red) else img_like.setImageResource(R.drawable.like_grey)
-        if(post.wasComment) img_comment.setImageResource(R.drawable.comment_red) else img_comment.setImageResource(R.drawable.comment_grey)
         if(post.wasShared) img_share.setImageResource(R.drawable.share_red) else img_share.setImageResource(R.drawable.share_grey)
-        likes.text = post.likes.toString()
-        comments.text = post.comments.toString()
         shares.text = post.shares.toString()
     }
 
-    private fun checkingClickResult(type: String) {
-        if(type === "share") {
-            if(post.shares == 0) shares.alpha = (0).toFloat() else shares.alpha = (1).toFloat()
-            if(post.wasShared) img_share.setImageResource(R.drawable.share_red) else img_share.setImageResource(R.drawable.share_grey)
-            shares.text = post.shares.toString()
-        }
-        if(type === "comment") {
-            if(post.comments == 0) comments.alpha = (0).toFloat() else comments.alpha = (1).toFloat()
-            if(post.wasComment) img_comment.setImageResource(R.drawable.comment_red) else img_comment.setImageResource(R.drawable.comment_grey)
-            comments.text = post.comments.toString()
-        }
-        if(type === "like") {
-            if(post.likes == 0) likes.alpha = (0).toFloat() else likes.alpha = (1).toFloat()
-            if(post.wasLiked) img_like.setImageResource(R.drawable.like_red) else img_like.setImageResource(R.drawable.like_grey)
-            likes.text = post.likes.toString()
-        }
-
-
-
+    private fun checkingComments() {
+        if(post.comments == 0) comments.alpha = (0).toFloat() else comments.alpha = (1).toFloat()
+        if(post.wasComment) img_comment.setImageResource(R.drawable.comment_red) else img_comment.setImageResource(R.drawable.comment_grey)
+        comments.text = post.comments.toString()
     }
+
+    private fun checkingLikes() {
+        if(post.likes == 0) likes.alpha = (0).toFloat() else likes.alpha = (1).toFloat()
+        if(post.wasLiked) img_like.setImageResource(R.drawable.like_red) else img_like.setImageResource(R.drawable.like_grey)
+        likes.text = post.likes.toString()
+    }
+
+
 
     private fun initClickers() {
         img_share.setOnClickListener{
             if(it is ImageButton) {
-                post.share()
-                checkingClickResult("share")
+                post = post.share()
+                checkingShares()
             }
         }
 
         img_like.setOnClickListener{
             if(it is ImageButton) {
-                post.like()
-                checkingClickResult("like")
+                post = post.like()
+                checkingLikes()
             }
         }
 
         img_comment.setOnClickListener{
             if(it is ImageButton) {
-                post.comment()
-                checkingClickResult("comment")
+                post = post.comment()
+                checkingComments()
             }
         }
 

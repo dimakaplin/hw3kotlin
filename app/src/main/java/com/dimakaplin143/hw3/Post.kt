@@ -2,19 +2,20 @@ package com.dimakaplin143.hw3
 
 import java.util.*
 
-class Post(
-    var postDate: Calendar = GregorianCalendar(),
-    var postName: String = "Time to wine",
-    var postAuthor: String  = "Big brother",
-    var likes: Int  = 0,
-    var comments: Int = 1,
-    var shares: Int = 0,
-    var wasLiked: Boolean = false,
-    var wasComment: Boolean = true,
-    var wasShared: Boolean = false,
-    var location: Location = Location(),
-    var videoURL: String = "",
-    var hasVideo: Boolean = videoURL !== ""
+data class Post(
+    val postDate: Calendar = GregorianCalendar(),
+    val postName: String = "Time to wine",
+    val postAuthor: String  = "Big brother",
+    val likes: Int  = 0,
+    val comments: Int = 1,
+    val shares: Int = 0,
+    val wasLiked: Boolean = false,
+    val wasComment: Boolean = true,
+    val wasShared: Boolean = false,
+    val location: Location = Location(),
+    val videoURL: String = "",
+    val hasVideo: Boolean = videoURL !== "",
+    val hasLocation: Boolean = location.address !== ""
 ) {
     fun getDateDiff(): String {
         val now: Calendar = GregorianCalendar()
@@ -37,20 +38,23 @@ class Post(
 
     }
 
-    fun like(): Boolean {
-        wasLiked = !wasLiked
-        if(wasLiked) ++likes else --likes
-        return wasLiked
+    fun like(): Post {
+        var newLikes: Int = likes;
+        if(!wasLiked) ++newLikes else --newLikes
+        return this.copy( wasLiked = !wasLiked, likes = newLikes)
     }
-    fun share(): Boolean {
-        wasShared = !wasShared
-        if(wasShared) ++shares else --shares
-        return wasLiked
+    fun share(): Post {
+        var newShares = shares
+        if(!wasShared) ++newShares else --newShares
+        return this.copy( wasShared = !wasShared, shares = newShares)
+
     }
-    fun comment(): Boolean {
-        wasComment = !wasComment
-        if(wasComment) ++comments else --comments
-        return wasLiked
+
+    fun comment(): Post {
+        var newComents = comments;
+        if(!wasComment) ++newComents else --newComents
+        return this.copy( wasComment = !wasComment, comments = newComents)
+
     }
 
 }
