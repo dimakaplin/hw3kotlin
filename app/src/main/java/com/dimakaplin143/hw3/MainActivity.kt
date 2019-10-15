@@ -50,24 +50,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun initClickers() {
         img_share.setOnClickListener{
-            if(it is ImageButton) {
                 post = post.share()
                 checkingShares()
-            }
         }
 
         img_like.setOnClickListener{
-            if(it is ImageButton) {
                 post = post.like()
                 checkingLikes()
-            }
         }
 
         img_comment.setOnClickListener{
-            if(it is ImageButton) {
                 post = post.comment()
                 checkingComments()
-            }
         }
 
         img_location.setOnClickListener {
